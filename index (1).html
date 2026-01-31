@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>PWA App</title>
+ <link rel="manifest" href="/manifest.json">
+ <meta name="theme-color" content="#000000">
+</head>
+<body>
+ <h1>PWA App</h1>
+ <p>This app works offline.</p>
+ <button id="installBtn" hidden>Install App</button>
+ <script>
+ if ('serviceWorker' in navigator) {
+ navigator.serviceWorker.register('/service-worker.js');
+ }
+ let deferredPrompt;
+ const installBtn = document.getElementById('installBtn');
+ window.addEventListener('beforeinstallprompt', (e) => {
+ e.preventDefault();
+ deferredPrompt = e;
+ installBtn.hidden = false;
+ });
+ installBtn.addEventListener('click', async () => {
+ installBtn.hidden = true;
+ await deferredPrompt.prompt();
+ deferredPrompt = null;
+ });
+ </script>
+</body>
+</html>
