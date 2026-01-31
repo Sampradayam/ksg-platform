@@ -1,6 +1,0 @@
-export default function admin(req, res, next) {
-  if (req.user.role !== 'ADMIN') {
-    return res.status(403).json({ message: 'Admin only access' });
-  }
-  next();
-}
