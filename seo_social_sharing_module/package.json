@@ -1,0 +1,18 @@
+{
+  "name": "seo-social-sharing-module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tiny React SEO & social sharing module extracted from the provided PDF",
+  "main": "src/index.jsx",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet-async": "^1.3.0",
+    "react-i18next": "^12.1.0"
+  },
+  "scripts": {
+    "build": "echo 'This package contains components; integrate into your app build.'",
+    "test": "echo 'No tests provided'"
+  }
+}
