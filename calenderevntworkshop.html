@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="calendar.title"></title>
+  <link rel="stylesheet" href="calender.css" />
+</head>
+<body>
+  <main class="calendar">
+    <nav class="calendar-tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="academic" data-i18n="calendar.tabs.academic"></button>
+      <button role="tab" aria-selected="false" data-tab="events" data-i18n="calendar.tabs.events"></button>
+      <button role="tab" aria-selected="false" data-tab="workshops" data-i18n="calendar.tabs.workshops"></button>
+    </nav>
+
+    <section id="academic" class="tab-panel" role="tabpanel"></section>
+    <section id="events" class="tab-panel hidden" role="tabpanel"></section>
+    <section id="workshops" class="tab-panel hidden" role="tabpanel"></section>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
