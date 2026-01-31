@@ -1,148 +1,311 @@
-# ksg-platform
-A digital Kuchipudi Gurukulam platform combining AI-powered storytelling, slokha and mudra explanations, courses, admissions, RBAC, admin portal, helpline, festivals, and cultural tourism support. Treating Kuchipudi as an art form, not just a tradition.
+# KSG Platform - React UI Framework
 
-## Architecture
-This project follows a layered, service-oriented architecture designed for multi-tenant cultural education platforms with AI-assisted learning. The system is split into presentation, API, domain services, AI/ML, and data layers, with shared infrastructure for security, observability, and delivery.
+A production-ready React application framework with a comprehensive UI component library, form validation, routing, and full accessibility support.
 
-### High-level system view
-```mermaid
-flowchart LR
-	subgraph Clients
-		Web[Web App]
-		Mobile[Mobile App]
-		Admin[Admin Portal]
-	end
+## ✨ Features
 
-	subgraph Edge
-		CDN[CDN/Static Assets]
-		WAF[WAF + Rate Limiting]
-	end
+✅ **Global Layout System** - Consistent navbar and footer across all pages  
+✅ **React Router Integration** - Full routing with active route highlighting  
+✅ **Error Boundary** - Centralized error handling with user-friendly UI  
+✅ **Navigation System** - Responsive navbar with keyboard navigation and mobile menu  
+✅ **UI Component Library** - Button, Input, Modal, Card, Alert, DatePicker  
+✅ **Form Validation Framework** - Comprehensive validation utilities with useForm hook  
+✅ **Toast Notifications** - Multi-state notifications (success/error/info/warning) with auto-dismiss  
+✅ **Accessibility (WCAG 2.1)** - Full keyboard support, ARIA labels, focus management  
+✅ **Responsive Design** - Mobile-first approach with CSS Grid/Flexbox
 
-	subgraph Core
-		API[API Gateway / BFF]
-		Auth[Identity & RBAC]
-		Course[Course & Curriculum Service]
-		Admissions[Admissions & Enrollment]
-		Content[Content & Media Service]
-		Events[Festivals & Events]
-		Help[Helpline & Support]
-		Tourism[Cultural Tourism]
-		Payments[Payments & Billing]
-		Notify[Notifications]
-	end
+## 📁 Project Structure
 
-	subgraph AI
-		Story[AI Storytelling]
-		Slokha[Slokha/Mudra Explainer]
-		Rec[Personalized Recommendations]
-		Search[Semantic Search]
-	end
-
-	subgraph Data
-		SQL[(Relational DB)]
-		Obj[(Object Storage)]
-		Cache[(Cache)]
-		Queue[(Message Queue)]
-		Vector[(Vector DB)]
-		Audit[(Audit Log Store)]
-	end
-
-	Web --> CDN --> WAF --> API
-	Mobile --> WAF --> API
-	Admin --> WAF --> API
-
-	API --> Auth
-	API --> Course
-	API --> Admissions
-	API --> Content
-	API --> Events
-	API --> Help
-	API --> Tourism
-	API --> Payments
-	API --> Notify
-
-	Course --> SQL
-	Admissions --> SQL
-	Content --> SQL
-	Content --> Obj
-	Events --> SQL
-	Help --> SQL
-	Tourism --> SQL
-	Payments --> SQL
-	Notify --> Queue
-	API --> Cache
-
-	Content --> Search
-	Story --> Vector
-	Slokha --> Vector
-	Rec --> Vector
-	Search --> Vector
-	AI --> Queue
-
-	Auth --> Audit
+```
+src/
+├── components/
+│   ├── ui/                      # Reusable UI components
+│   │   ├── Button.jsx           # Primary, secondary, danger, ghost variants
+│   │   ├── Button.css
+│   │   ├── Input.jsx            # Text, email, password, tel types
+│   │   ├── Input.css
+│   │   ├── Modal.jsx            # Focus trap, ESC to close
+│   │   ├── Modal.css
+│   │   ├── Card.jsx             # Content container with optional header/footer
+│   │   ├── Card.css
+│   │   ├── Alert.jsx            # Success/error/warning/info states
+│   │   ├── Alert.css
+│   │   ├── DatePicker.jsx       # Multi-format date selection
+│   │   └── DatePicker.css
+│   ├── Navbar.jsx               # Responsive nav with active route highlight
+│   ├── Navbar.css
+│   ├── Footer.jsx               # Footer with links and copyright
+│   ├── Footer.css
+│   ├── ErrorBoundary.jsx        # Global error handling
+│   ├── Toast.jsx                # Notification display
+│   └── Toast.css
+├── layouts/
+│   ├── MainLayout.jsx           # Global layout wrapper
+│   └── MainLayout.css
+├── pages/
+│   ├── HomePage.jsx             # Landing page with features
+│   ├── ComponentsPage.jsx       # Component showcase
+│   ├── FormsPage.jsx            # Form examples and validation
+│   └── DocumentationPage.jsx    # Getting started guide
+├── hooks/
+│   └── useForm.js               # Form state, validation, submission
+├── utils/
+│   └── validation.js            # 15+ validation rules and utilities
+├── context/
+│   └── ToastContext.jsx         # Toast notification system
+├── App.jsx                      # Main router setup
+├── main.jsx                     # Entry point
+└── index.css                    # Global design tokens and styles
 ```
 
-### Presentation layer
-- **Web App**: Public-facing portal for storytelling, courses, events, and tourism.
-- **Mobile App**: Learner-first experience optimized for practice and lessons.
-- **Admin Portal**: Back-office tools for admissions, content management, festivals, and operations.
+## 🚀 Quick Start
 
-### Edge & access
-- **CDN/Static hosting** for fast delivery of media and front-end assets.
-- **WAF + rate limiting** to protect public APIs and prevent abuse.
-- **API Gateway / BFF** to unify request routing, versioning, and response shaping per client.
+### Installation
 
-### Core domain services
-- **Identity & RBAC**: User profiles, roles (student, instructor, admin), and permissions.
-- **Course & Curriculum**: Modules, lessons, progress tracking, evaluations.
-- **Admissions & Enrollment**: Application workflow, approvals, cohort assignment.
-- **Content & Media**: Slokhas, mudras, audio/video, metadata, tagging.
-- **Festivals & Events**: Scheduling, participation, announcements.
-- **Helpline & Support**: Tickets, FAQs, escalation.
-- **Cultural Tourism**: Itineraries, guides, heritage places, bookings.
-- **Payments & Billing**: Fees, receipts, and reconciliation.
-- **Notifications**: Email/SMS/push dispatch with templates and delivery tracking.
+```bash
+npm install
+npm run dev
+```
 
-### AI/ML services
-- **AI Storytelling**: Narrative generation and interactive cultural storytelling.
-- **Slokha/Mudra Explainer**: Contextual explanations, pronunciation guidance, and visual cues.
-- **Personalized Recommendations**: Course, practice, and content suggestions.
-- **Semantic Search**: Search across slokhas, mudras, and curriculum content.
+Open [http://localhost:3000](http://localhost:3000)
 
-### Data layer
-- **Relational DB**: Source of truth for users, courses, admissions, and events.
-- **Object Storage**: Media assets (audio, video, images, documents).
-- **Cache**: Session caching, hot content, and AI response caching.
-- **Message Queue**: Async jobs (notifications, AI tasks, media processing).
-- **Vector DB**: Embeddings for semantic search and AI retrieval.
-- **Audit Log Store**: Immutable audit trail for compliance and admin actions.
+### Build & Deploy
 
-### Security & compliance
-- **RBAC** at API and service level.
-- **PII protection** with encryption at rest and in transit.
-- **Audit trails** for admin actions, admissions decisions, and payments.
+```bash
+npm run build
+npm run preview
+```
 
-### Observability & reliability
-- **Centralized logging** with trace correlation across services.
-- **Metrics & dashboards** for API latency, AI usage, and queue health.
-- **Alerts** for error rates, failed jobs, and payment anomalies.
+## 🎨 Components
 
-### Deployment model
-- **Containerized services** deployed behind a load balancer.
-- **Blue/green or rolling deployments** for minimal downtime.
-- **Infrastructure as code** to standardize environments.
+### Button
+Variants: `primary`, `secondary`, `danger`, `ghost`  
+Sizes: `small`, `medium`, `large`
 
-### CI/CD pipeline
-- **Lint + tests** on every change.
-- **Build & security scanning** for dependencies and containers.
-- **Automated deployments** to staging and production with approvals.
+```jsx
+<Button variant="primary" size="medium" disabled={false} loading={false}>
+  Click Me
+</Button>
+```
 
-### Data flow summary
-1. Client requests hit the edge layer (CDN/WAF) and route to the API.
-2. API authenticates and authorizes with RBAC.
-3. Core services execute business logic and persist to the relational store.
-4. Media goes to object storage, while AI-related requests go through the queue and vector store.
-5. Notifications are sent asynchronously, with delivery events logged.
+### Input
+Supports email, password, tel, number, text, and textarea
+
+```jsx
+<Input
+  label="Email"
+  type="email"
+  placeholder="user@example.com"
+  error={errors.email}
+  helpText="We'll never share your email"
+  required
+/>
+```
+
+### DatePicker
+Formats: `YYYY-MM-DD`, `MM/DD/YYYY`, `DD/MM/YYYY`
+
+```jsx
+<DatePicker
+  label="Date of Birth"
+  value={date}
+  onChange={setDate}
+  format="MM/DD/YYYY"
+  minDate="1990-01-01"
+  maxDate="2010-12-31"
+/>
+```
+
+### Modal
+Focus trap, ESC to close, keyboard navigation
+
+```jsx
+<Modal
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Confirm Action"
+  size="medium"
+  actions={
+    <>
+      <Button onClick={() => setIsOpen(false)}>Cancel</Button>
+      <Button variant="primary" onClick={handleConfirm}>
+        Confirm
+      </Button>
+    </>
+  }
+>
+  <p>Are you sure you want to proceed?</p>
+</Modal>
+```
+
+### Alert
+Variants: `success`, `error`, `warning`, `info`
+
+```jsx
+<Alert
+  variant="success"
+  title="Success!"
+  message="Your changes have been saved."
+  dismissible
+  onClose={handleClose}
+/>
+```
+
+### Card
+Flexible content container
+
+```jsx
+<Card
+  title="Card Title"
+  description="Subtitle or description text"
+  footer={<Button>Action</Button>}
+>
+  <p>Card content goes here</p>
+</Card>
+```
+
+## 📋 Form Validation
+
+```jsx
+import { useForm } from './hooks/useForm'
+
+const MyForm = () => {
+  const validate = (values) => {
+    const errors = {}
+    if (!values.email) {
+      errors.email = 'Email is required'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      errors.email = 'Invalid email format'
+    }
+    return errors
+  }
+
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    resetForm
+  } = useForm(
+    { email: '', password: '' },
+    onSubmit,
+    validate
+  )
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input
+        name="email"
+        value={values.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={touched.email && errors.email}
+      />
+      <Input
+        name="password"
+        type="password"
+        value={values.password}
+        onChange={handleChange}
+        error={touched.password && errors.password}
+      />
+      <Button type="submit">Submit</Button>
+      <Button type="button" variant="secondary" onClick={resetForm}>
+        Reset
+      </Button>
+    </form>
+  )
+}
+```
+
+### Available Validators
+
+```javascript
+validateEmail(email)                        // RFC compliant
+validatePassword(password, minLength = 8)   // Length check
+validatePasswordStrength(password)          // Score 0-4
+validatePhoneNumber(phone)                  // International formats
+validateURL(url)                            // URL format
+validateMinLength(value, minLength)         // Minimum chars
+validateMaxLength(value, maxLength)         // Maximum chars
+validateRequired(value)                     // Non-empty
+validateDate(date)                          // Valid date
+validateDateRange(date, min, max)           // Date range
+validationRules                             // Composable validators
+```
+
+## 🔔 Toast Notifications
+
+```jsx
+import { useToast } from './context/ToastContext'
+
+const MyComponent = () => {
+  const { success, error, info, warning } = useToast()
+
+  return (
+    <>
+      <button onClick={() => success('Saved!')}>Save</button>
+      <button onClick={() => error('Something went wrong!')}>Error</button>
+      <button onClick={() => info('FYI: This is a heads up')}>Info</button>
+      <button onClick={() => warning('Warning: Action required!')}>
+        Warning
+      </button>
+    </>
+  )
+}
+```
+
+Auto-dismiss durations:
+- `success`: 3 seconds
+- `error`: 5 seconds
+- `info`: 3 seconds
+- `warning`: 4 seconds
+
+## ♿ Accessibility
+
+All components are built with WCAG 2.1 Level AA compliance:
+
+- ✓ **Keyboard Navigation**: Tab/Shift+Tab, Enter, Space, ESC
+- ✓ **ARIA Labels**: `aria-label`, `aria-describedby`, `aria-invalid`
+- ✓ **Focus Management**: Focus trap in modals, focus restoration
+- ✓ **Semantic HTML**: Proper elements (button, nav, main, footer, etc.)
+- ✓ **Color Contrast**: All text meets 4.5:1 minimum ratio
+- ✓ **Error Association**: Error messages linked to fields
+- ✓ **Screen Reader Support**: Proper roles and live regions
+
+## 📱 Responsive Design
+
+Mobile-first approach with breakpoints:
+- **Mobile**: < 640px
+- **Tablet**: 640px - 1024px
+- **Desktop**: > 1024px
+
+## 🛠️ Technologies
+
+- **React 18** - UI library
+- **React Router 6** - Client-side routing
+- **Vite 5** - Build tool
+- **CSS3** - Styling (Grid, Flexbox, custom properties)
+- **JavaScript ES2020+** - Modern syntax
+
+## 📚 Documentation Pages
+
+- **Home** (`/`) - Feature overview and quick start
+- **Components** (`/components`) - Interactive component showcase
+- **Forms** (`/forms`) - Form validation examples
+- **Documentation** (`/docs`) - Getting started guide
+
+## 🌍 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 📄 License
+
+MIT
 
 ---
 
