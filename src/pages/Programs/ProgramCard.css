@@ -1,0 +1,24 @@
+.program-card {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.program-card h3 {
+  margin-bottom: 0.8rem;
+  color: #5a2a2a;
+}
+
+.program-card p {
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Push CTA to bottom */
+.program-card p:last-of-type {
+  margin-bottom: auto;
+}

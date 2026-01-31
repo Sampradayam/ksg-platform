@@ -1,0 +1,15 @@
+.enroll-btn {
+  margin-top: 1.2rem;
+  padding: 0.7rem;
+  background-color: #8b3a3a;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.enroll-btn:hover {
+  background-color: #6e2c2c;
+}

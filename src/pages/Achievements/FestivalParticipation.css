@@ -1,0 +1,10 @@
+.festivals-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.festival-card{padding:14px;border-radius:10px;border:1px solid #f0f0f0;background:linear-gradient(180deg,#fff,#fbfbff);transition:transform 160ms ease,box-shadow 160ms ease;color:#000}
+.festival-card:focus,.festival-card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(11,92,255,0.06);outline:none}
+.festival-name{font-weight:700;color:#000}
+.festival-meta{font-size:0.95rem;color:#222}
+.loading,.empty,.error{text-align:center;padding:14px;color:#666}
+
+@media (max-width:520px){
+	.festivals-list{grid-template-columns:1fr}
+}
