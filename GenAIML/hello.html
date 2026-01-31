@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Final QA & Release Checklist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: #020617;
+            padding: 30px;
+            border-radius: 12px;
+            width: 420px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #38bdf8;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: none;
+            background: #1e293b;
+            color: #e5e7eb;
+        }
+        
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            background: #22c55e;
+            color: #022c22;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #16a34a;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .approved {
+            background: #064e3b;
+            color: #6ee7b7;
+        }
+        
+        .blocked {
+            background: #7f1d1d;
+            color: #fecaca;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Final QA & Release</h1>
+
+        <div class="step">
+            <label>Acceptance Criteria Met?</label>
+            <select id="acceptance">
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+        </div>
+
+        <div class="step">
+            <label>All Test Cases Completed?</label>
+            <select id="tests">
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+        </div>
+
+        <div class="step">
+            <label>High Severity Issues Resolved?</label>
+            <select id="bugs">
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+        </div>
+
+        <div class="step">
+            <label>UAT Signed Off?</label>
+            <select id="uat">
+      <option value="">Select</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+        </div>
+
+        <button onclick="checkRelease()">Check Release Status</button>
+
+        <div id="result" class="result" style="display:none;"></div>
+    </div>
+
+    <script>
+        function checkRelease() {
+            const acceptance = document.getElementById("acceptance").value;
+            const tests = document.getElementById("tests").value;
+            const bugs = document.getElementById("bugs").value;
+            const uat = document.getElementById("uat").value;
+            const resultBox = document.getElementById("result");
+
+            if (!acceptance || !tests || !bugs || !uat) {
+                alert("Please complete all steps before checking release status.");
+                return;
+            }
+
+            if (acceptance === "yes" && tests === "yes" && bugs === "yes" && uat === "yes") {
+                resultBox.className = "result approved";
+                resultBox.innerText = "✅ RELEASE APPROVED – Ready for Production 🚀";
+            } else {
+                resultBox.className = "result blocked";
+                resultBox.innerText = "❌ RELEASE BLOCKED – Fix issues before releasing.";
+            }
+
+            resultBox.style.display = "block";
+        }
+    </script>
+
+</body>
+
+</html>

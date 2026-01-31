@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Breadcrumb Navigation</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    nav {
+      background: #fff;
+      padding: 10px 14px;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      font-size: 14px;
+    }
+
+    nav a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .current {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .separator {
+      margin: 0 6px;
+      color: #999;
+    }
+
+    .warning {
+      color: #999;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Sampradayam Web Application</h2>
+
+  <!-- Breadcrumb container -->
+  <nav id="breadcrumb"></nav>
+
+  <script>
+    // Breadcrumb rendering logic
+    function renderBreadcrumb(path) {
+      const container = document.getElementById("breadcrumb");
+
+      if (!Array.isArray(path) || path.length === 0) {
+        container.innerHTML =
+          "<span class='warning'>Breadcrumb not available</span>";
+        return;
+      }
+
+      const html = path
+        .map((item, index) => {
+          if (index === path.length - 1) {
+            return `<span class="current">${item}</span>`;
+          }
+          return `<a href="#">${item}</a>`;
+        })
+        .join('<span class="separator">›</span>');
+
+      container.innerHTML = html;
+    }
+
+    // Data (previously from Python, now native JS)
+    renderBreadcrumb([
+      "Home",
+      "Courses",
+      "Computer Science",
+      "Data Structures"
+    ]);
+  </script>
+
+</body>
+</html>

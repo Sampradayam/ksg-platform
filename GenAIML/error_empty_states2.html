@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Error Empty States</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 16px;
+}
+
+.card {
+    background: #020617;
+    padding: 28px;
+    border-radius: 12px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+p {
+    color: #94a3b8;
+}
+
+button {
+    margin-top: 16px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+button:focus {
+    outline: 3px solid #93c5fd;
+}
+</style>
+</head>
+
+<body>
+<div class="container" id="app"></div>
+
+<script>
+/* ---------------- I18N ---------------- */
+const I18N = {
+    noData: {
+        title: "No Data Available",
+        message: "There is currently no data to display."
+    },
+    networkError: {
+        title: "Network Error",
+        message: "Please check your internet connection and try again."
+    },
+    notFound: {
+        title: "404 - Page Not Found",
+        message: "The page you are looking for does not exist."
+    },
+    back: "Back to Home"
+};
+
+/* ---------------- COMPONENT ---------------- */
+function createCard(title, message, showButton = false) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.setAttribute("role", "alert");
+
+    card.innerHTML = `
+        <h1>${title}</h1>
+        <p>${message}</p>
+        ${showButton ? `<button onclick="renderHome()">${I18N.back}</button>` : ""}
+    `;
+
+    return card;
+}
+
+/* ---------------- RENDER FUNCTIONS ---------------- */
+function renderHome() {
+    const app = document.getElementById("app");
+    app.innerHTML = "";
+
+    app.appendChild(createCard(
+        I18N.noData.title,
+        I18N.noData.message
+    ));
+
+    app.appendChild(createCard(
+        I18N.networkError.title,
+        I18N.networkError.message
+    ));
+
+    app.appendChild(createCard(
+        I18N.notFound.title,
+        I18N.notFound.message
+    ));
+}
+
+/* ---------------- INIT ---------------- */
+renderHome();
+</script>
+
+</body>
+</html>
