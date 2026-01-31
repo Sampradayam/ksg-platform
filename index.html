@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Authentication</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+
+<main class="auth-container">
+  <section class="auth-card">
+
+    <h1 id="authTitle"></h1>
+
+    <!-- Login -->
+    <form id="loginForm" class="auth-form" hidden>
+      <label>
+        <span data-i18n="auth.email"></span>
+        <input type="email" required />
+      </label>
+
+      <label>
+        <span data-i18n="auth.password"></span>
+        <input type="password" required />
+      </label>
+
+      <button type="submit" data-i18n="auth.login"></button>
+
+      <p class="auth-links">
+        <button type="button" data-action="forgot" class="link-btn" data-i18n="auth.forgot"></button>
+        <button type="button" data-action="signup" class="link-btn" data-i18n="auth.noAccount"></button>
+      </p>
+    </form>
+
+    <!-- Signup -->
+    <form id="signupForm" class="auth-form" hidden>
+      <label>
+        <span data-i18n="auth.name"></span>
+        <input type="text" required />
+      </label>
+
+      <label>
+        <span data-i18n="auth.email"></span>
+        <input type="email" required />
+      </label>
+
+      <label>
+        <span data-i18n="auth.password"></span>
+        <input type="password" required />
+      </label>
+
+      <button type="submit" data-i18n="auth.signup"></button>
+
+      <p class="auth-links">
+        <button type="button" data-action="login" class="link-btn" data-i18n="auth.haveAccount"></button>
+      </p>
+    </form>
+
+    <!-- Forgot Password -->
+    <form id="forgotForm" class="auth-form" hidden>
+      <label>
+        <span data-i18n="auth.email"></span>
+        <input type="email" required />
+      </label>
+
+      <button type="submit" data-i18n="auth.reset"></button>
+
+      <p class="auth-links">
+        <button type="button" data-action="login" class="link-btn" data-i18n="auth.backToLogin"></button>
+      </p>
+    </form>
+
+  </section>
+</main>
+
+<script src="auth.js"></script>
+</body>
+</html>
+
