@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notifications Module</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    /* =====================
+       Base + Utilities
+    ====================== */
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    [aria-busy="true"] {
+      opacity: 0.6;
+    }
+
+    /* =====================
+       Toasts
+    ====================== */
+    .toasts {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 1000;
+      max-width: 360px;
+    }
+
+    .toast {
+      background: #fff;
+      border-left: 4px solid;
+      padding: 0.75rem 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .toast--success { border-color: green; }
+    .toast--error { border-color: red; }
+    .toast--info { border-color: blue; }
+    .toast--warning { border-color: orange; }
+
+    .toast__close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      .toasts {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        max-width: 100%;
+        padding: 0.5rem;
+      }
+    }
+
+    /* =====================
+       Announcement Banners
+    ====================== */
+    .banners {
+      width: 100%;
+    }
+
+    .banner {
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .banner--info { background: #e7f3ff; }
+    .banner--warning { background: #fff4e5; }
+    .banner--critical { background: #fdecea; }
+
+    .banner__dismiss {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      .banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+
+    /* =====================
+       Student Alerts
+    ====================== */
+    .student-alerts {
+      padding: 1rem;
+    }
+
+    .alert-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .alert {
+      border: 1px solid #ddd;
+      padding: 1rem;
+    }
+
+    .alert--high { border-left: 4px solid red; }
+    .alert--medium { border-left: 4px solid orange; }
+    .alert--low { border-left: 4px solid blue; }
+
+    @media (min-width: 768px) {
+      .alert-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =====================
+     Notifications Module
+===================== -->
+<section id="notifications" aria-label="t('notifications.label')">
+
+  <!-- Toasts -->
+  <section class="toasts" aria-live="polite" id="toast-root"></section>
+
+  <!-- Announcement Banners -->
+  <section class="banners" role="region" aria-live="polite" id="banner-root"></section>
+
+  <!-- Student Alerts -->
+  <section class="student-alerts" aria-labelledby="alerts-title" id="alerts-root">
+    <h2 id="alerts-title" data-i18n="notifications.alerts.title"></h2>
+    <ul class="alert-list"></ul>
+  </section>
+
+</section>
+
+<!-- =====================
+     Demo Controls
+===================== -->
+<div style="padding:1rem">
+  <button onclick="addToast('success')">t('actions.addToast')</button>
+  <button onclick="addBanner()">t('actions.addBanner')</button>
+  <button onclick="addAlert()">t('actions.addAlert')</button>
+</div>
+
+<script>
+  /* =====================
+     Simple i18n Mock
+  ====================== */
+  function t(key) {
+    return key;
+  }
+
+  /* =====================
+     Toasts Logic
+  ====================== */
+  function addToast(type) {
+    const toastRoot = document.getElementById('toast-root');
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast--${type}`;
+    toast.setAttribute('tabindex', '0');
+    toast.setAttribute(
+      'role',
+      type === 'error' ? 'alert' : 'status'
+    );
+
+    toast.innerHTML = `
+      <div>
+        <strong>${t('notifications.toasts.title')}</strong>
+        <div>${t('notifications.toasts.message')}</div>
+      </div>
+      <button
+        class="toast__close"
+        aria-label="${t('notifications.toasts.dismiss')}"
+      >×</button>
+    `;
+
+    toast.querySelector('button').onclick = () => toast.remove();
+    toastRoot.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 5000);
+  }
+
+  /* =====================
+     Banners Logic
+  ====================== */
+  function addBanner() {
+    const bannerRoot = document.getElementById('banner-root');
+
+    const banner = document.createElement('div');
+    banner.className = 'banner banner--warning';
+    banner.innerHTML = `
+      <span>${t('notifications.banner.message')}</span>
+      <button
+        class="banner__dismiss"
+        aria-label="${t('notifications.banner.dismiss')}"
+      >×</button>
+    `;
+
+    banner.querySelector('button').onclick = () => banner.remove();
+    bannerRoot.appendChild(banner);
+  }
+
+  /* =====================
+     Student Alerts Logic
+  ====================== */
+  function addAlert() {
+    const list = document.querySelector('.alert-list');
+
+    const alert = document.createElement('li');
+    alert.className = 'alert alert--high';
+    alert.setAttribute('tabindex', '0');
+
+    alert.innerHTML = `
+      <h3>${t('notifications.alerts.itemTitle')}</h3>
+      <p>${t('notifications.alerts.itemBody')}</p>
+      <button aria-label="${t('notifications.alerts.markRead')}">
+        ${t('notifications.alerts.markRead')}
+      </button>
+    `;
+
+    alert.querySelector('button').onclick = () => alert.remove();
+    list.appendChild(alert);
+  }
+</script>
+
+</body>
+</html>
