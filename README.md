@@ -143,7 +143,3 @@ flowchart LR
 3. Core services execute business logic and persist to the relational store.
 4. Media goes to object storage, while AI-related requests go through the queue and vector store.
 5. Notifications are sent asynchronously, with delivery events logged.
-
----
-
-If you want the architecture tailored to a specific cloud provider or stack, share the target platform and preferred technologies.
