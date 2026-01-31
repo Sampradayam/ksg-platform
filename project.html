@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sampradayam Theme Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ================== THEME TOKENS ================== -->
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #1a1a1a;
+      --color-primary: #7b2c2c;
+      --festival-accent: transparent;
+    }
+
+    /* Cultural themes */
+    :root[data-theme="vedic"] {
+      --color-primary: #7b2c2c;
+      --color-bg: #fffaf2;
+    }
+
+    :root[data-theme="temple"] {
+      --color-primary: #5a3e2b;
+      --color-bg: #fdf7f2;
+    }
+
+    :root[data-theme="minimal"] {
+      --color-primary: #2f2f2f;
+      --color-bg: #ffffff;
+    }
+
+    /* Festival overlay */
+    :root[data-festival="diwali"] {
+      --festival-accent: #ff9f1c;
+    }
+
+    :root[data-festival="navaratri"] {
+      --festival-accent: #c1121f;
+    }
+
+    /* Dark mode */
+    :root[data-mode="dark"] {
+      --color-bg: #0f0f0f;
+      --color-text: #f5f5f5;
+    }
+
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: system-ui, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+
+    h1, h2 {
+      color: var(--color-primary);
+    }
+
+    section {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border-left: 4px solid var(--festival-accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.75rem;
+    }
+
+    button {
+      padding: 0.6rem 0.9rem;
+      border-radius: 0.6rem;
+      border: 2px solid transparent;
+      background: var(--color-bg);
+      color: var(--color-text);
+      cursor: pointer;
+    }
+
+    button.active {
+      border-color: var(--color-primary);
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--color-primary);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 id="app-title"></h1>
+
+  <!-- ================== CULTURAL THEMES ================== -->
+  <section>
+    <h2 id="theme-title"></h2>
+    <div class="grid" role="radiogroup" id="theme-options"></div>
+  </section>
+
+  <!-- ================== FESTIVAL MODE (TOGGLE) ================== -->
+  <section>
+    <h2 id="festival-title"></h2>
+    <div class="grid" id="festival-options"></div>
+  </section>
+
+  <!-- ================== DARK MODE ================== -->
+  <section>
+    <h2 id="darkmode-title"></h2>
+    <div class="grid" role="radiogroup" id="darkmode-options"></div>
+  </section>
+
+  <!-- ================== JAVASCRIPT ================== -->
+  <script>
+    /* ================== i18n ================== */
+    const MESSAGES = {
+      "app.title": "Sampradayam Theme Settings",
+
+      "theme.title": "Cultural Theme",
+      "theme.vedic": "Vedic",
+      "theme.temple": "Temple",
+      "theme.minimal": "Minimal",
+
+      "festival.title": "Festival Mode",
+      "festival.diwali": "Diwali",
+      "festival.navaratri": "Navaratri",
+
+      "darkmode.title": "Color Mode",
+      "darkmode.light": "Light",
+      "darkmode.dark": "Dark",
+      "darkmode.system": "System"
+    };
+
+    const t = (key) => MESSAGES[key] || key;
+
+    /* ================== DATA ================== */
+    const themes = ["vedic", "temple", "minimal"];
+    const festivals = ["diwali", "navaratri"];
+    const modes = ["light", "dark", "system"];
+
+    /* ================== TITLES ================== */
+    document.getElementById("app-title").textContent = t("app.title");
+    document.getElementById("theme-title").textContent = t("theme.title");
+    document.getElementById("festival-title").textContent = t("festival.title");
+    document.getElementById("darkmode-title").textContent = t("darkmode.title");
+
+    /* ================== CULTURAL THEMES ================== */
+    const themeContainer = document.getElementById("theme-options");
+    const savedTheme = localStorage.getItem("cultural-theme") || "vedic";
+    document.documentElement.dataset.theme = savedTheme;
+
+    themes.forEach(theme => {
+      const btn = document.createElement("button");
+      btn.textContent = t(`theme.${theme}`);
+      btn.setAttribute("role", "radio");
+      btn.setAttribute("aria-checked", theme === savedTheme);
+      if (theme === savedTheme) btn.classList.add("active");
+
+      btn.onclick = () => {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem("cultural-theme", theme);
+        updateActive(themeContainer, btn);
+      };
+
+      themeContainer.appendChild(btn);
+    });
+
+    /* ================== FESTIVAL MODE (TOGGLE) ================== */
+    const festivalContainer = document.getElementById("festival-options");
+    const savedFestival = localStorage.getItem("festival-mode");
+
+    if (savedFestival) {
+      document.documentElement.dataset.festival = savedFestival;
+    }
+
+    festivals.forEach(festival => {
+      const btn = document.createElement("button");
+      btn.textContent = t(`festival.${festival}`);
+      btn.setAttribute("aria-pressed", festival === savedFestival);
+
+      if (festival === savedFestival) {
+        btn.classList.add("active");
+      }
+
+      btn.onclick = () => {
+        const current = document.documentElement.dataset.festival;
+
+        // Toggle OFF
+        if (current === festival) {
+          delete document.documentElement.dataset.festival;
+          localStorage.removeItem("festival-mode");
+          btn.classList.remove("active");
+          btn.setAttribute("aria-pressed", "false");
+          return;
+        }
+
+        // Toggle ON (only one allowed)
+        document.documentElement.dataset.festival = festival;
+        localStorage.setItem("festival-mode", festival);
+
+        [...festivalContainer.children].forEach(b => {
+          b.classList.remove("active");
+          b.setAttribute("aria-pressed", "false");
+        });
+
+        btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
+      };
+
+      festivalContainer.appendChild(btn);
+    });
+
+    /* ================== DARK MODE ================== */
+    const darkContainer = document.getElementById("darkmode-options");
+    const savedMode = localStorage.getItem("color-mode") || "system";
+
+    function applyMode(mode) {
+      const resolved =
+        mode === "system"
+          ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+          : mode;
+
+      document.documentElement.dataset.mode = resolved;
+    }
+
+    applyMode(savedMode);
+
+    modes.forEach(mode => {
+      const btn = document.createElement("button");
+      btn.textContent = t(`darkmode.${mode}`);
+      if (mode === savedMode) btn.classList.add("active");
+
+      btn.onclick = () => {
+        localStorage.setItem("color-mode", mode);
+        applyMode(mode);
+        updateActive(darkContainer, btn);
+      };
+
+      darkContainer.appendChild(btn);
+    });
+
+    /* ================== UTIL ================== */
+    function updateActive(container, activeBtn) {
+      [...container.children].forEach(btn => btn.classList.remove("active"));
+      activeBtn.classList.add("active");
+    }
+  </script>
+
+</body>
+</html>
