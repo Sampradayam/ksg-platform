@@ -1,0 +1,68 @@
+:root {
+  --primary: #5b2d8b;
+  --bg: #fafafa;
+  --border: #ddd;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  background: var(--bg);
+}
+
+.calendar {
+  max-width: 1100px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.calendar-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.calendar-tabs button {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+}
+
+.calendar-tabs button[aria-selected="true"] {
+  background: var(--primary);
+  color: white;
+}
+
+.tab-panel {
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card button {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
