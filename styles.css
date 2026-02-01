@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fa;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+/* Tables */
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.responsive-table th,
+.responsive-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.responsive-table th {
+  background: #f0f0f0;
+}
+
+/* Empty State */
+.empty-state {
+  padding: 16px;
+  background: #fff;
+  border: 1px dashed #ccc;
+  color: #777;
+  border-radius: 6px;
+}
+
+/* Eligibility */
+.eligibility-list {
+  background: #fff;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.eligibility-list li {
+  margin-bottom: 8px;
+}
+
+/* Filters */
+.filter-panel {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: #333;
+  color: #fff;
+}
+
+/* Search */
+.search-input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  max-width: 300px;
+}
+
+/* Date filters */
+.date-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.date-filters input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Status badges */
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status.upcoming {
+  background: #e0f2ff;
+  color: #0369a1;
+}
+
+.status.ongoing {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.completed {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .responsive-table thead {
+    display: none;
+  }
+
+  .responsive-table tr {
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+  }
+
+  .responsive-table td {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .responsive-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+  }
+}
