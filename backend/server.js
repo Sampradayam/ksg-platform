@@ -14,11 +14,17 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.CORS_ORIGIN
+}));
 app.use(express.json());
+
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
+});
 
 app.use("/api", routes);
 
-app.listen(PORT, () =>
-  console.log(`Backend running on http://localhost:${PORT}`),
+app.listen(PORT, "0.0.0.0", () =>
+  console.log(`Backend running on port ${PORT}`),
 );
