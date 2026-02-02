@@ -1,0 +1,87 @@
+# CODEOWNERS
+# This file defines code ownership for automatic PR review assignments
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# =========================
+# GLOBAL OWNERS
+# =========================
+# Fallback owners for everything not explicitly defined
+* @Sampradayam/tech-leads
+
+# =========================
+# DOCUMENTATION
+# =========================
+/docs/ @Sampradayam/qa-team @Sampradayam/tech-leads
+*.md @Sampradayam/qa-team
+
+# =========================
+# DEVOPS & INFRASTRUCTURE
+# =========================
+/devops/ @Sampradayam/devops-team
+/.github/ @Sampradayam/devops-team
+/docker-compose.yml @Sampradayam/devops-team
+/Jenkinsfile @Sampradayam/devops-team
+**/Dockerfile @Sampradayam/devops-team
+**/.env.example @Sampradayam/devops-team
+
+# =========================
+# FRONTEND
+# =========================
+/frontend/ @Sampradayam/frontend-team
+/frontend/src/components/ @Sampradayam/frontend-team
+/frontend/src/pages/ @Sampradayam/frontend-team
+
+# Frontend Modules
+/frontend/src/modules/auth/ @Sampradayam/frontend-team @Sampradayam/identity-team
+/frontend/src/modules/courses/ @Sampradayam/frontend-team @Sampradayam/courses-team
+/frontend/src/modules/admissions/ @Sampradayam/frontend-team @Sampradayam/admissions-team
+/frontend/src/modules/helpline/ @Sampradayam/frontend-team @Sampradayam/support-team
+/frontend/src/modules/festivals/ @Sampradayam/frontend-team @Sampradayam/festivals-team
+/frontend/src/modules/tourism/ @Sampradayam/frontend-team @Sampradayam/tourism-team
+/frontend/src/modules/admin/ @Sampradayam/frontend-team @Sampradayam/admin-team
+/frontend/src/modules/ai/ @Sampradayam/frontend-team @Sampradayam/ai-team
+
+# =========================
+# BACKEND
+# =========================
+/backend/ @Sampradayam/backend-team
+/backend/server.js @Sampradayam/backend-team @Sampradayam/tech-leads
+/backend/middleware/ @Sampradayam/backend-team
+/backend/models/ @Sampradayam/backend-team
+/backend/routes/ @Sampradayam/backend-team
+/backend/controllers/ @Sampradayam/backend-team
+
+# Backend Modules
+/backend/src/modules/identity/ @Sampradayam/backend-team @Sampradayam/identity-team
+/backend/src/modules/courses/ @Sampradayam/backend-team @Sampradayam/courses-team
+/backend/src/modules/admissions/ @Sampradayam/backend-team @Sampradayam/admissions-team
+/backend/src/modules/helpline/ @Sampradayam/backend-team @Sampradayam/support-team
+/backend/src/modules/festivals/ @Sampradayam/backend-team @Sampradayam/festivals-team
+/backend/src/modules/tourism/ @Sampradayam/backend-team @Sampradayam/tourism-team
+/backend/src/modules/content/ @Sampradayam/backend-team @Sampradayam/content-team
+/backend/src/modules/ai/ @Sampradayam/backend-team @Sampradayam/ai-team
+/backend/src/modules/admin/ @Sampradayam/backend-team @Sampradayam/admin-team
+
+# =========================
+# SECURITY & AUTH
+# =========================
+/backend/middleware/authMiddleware.js @Sampradayam/identity-team @Sampradayam/tech-leads
+/backend/controllers/authController.js @Sampradayam/identity-team @Sampradayam/tech-leads
+/backend/models/userModel.js @Sampradayam/identity-team @Sampradayam/tech-leads
+
+# =========================
+# CONFIGURATION FILES
+# =========================
+package.json @Sampradayam/tech-leads
+package-lock.json @Sampradayam/tech-leads
+.gitignore @Sampradayam/devops-team
+.eslintrc* @Sampradayam/tech-leads
+.prettierrc* @Sampradayam/tech-leads
+
+# =========================
+# CRITICAL FILES
+# =========================
+# Require tech lead approval for critical changes
+/backend/server.js @Sampradayam/tech-leads
+/frontend/src/main.jsx @Sampradayam/tech-leads
+/frontend/src/App.jsx @Sampradayam/tech-leads
