@@ -37,7 +37,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF8E7] text-[#3E2723] font-serif">
+    <div className="min-h-screen bg-[#FFF8E7] text-[#3E2723] font-serif mt-14 sm:mt-20">
       {/* Hero Section with Full-Width Image Carousel and Text Overlay */}
       <div className="relative w-full h-screen">
         {/* Image Carousel - Full Width Background */}
@@ -66,7 +66,7 @@ export default function Home() {
           <div className="text-center max-w-5xl mx-auto">
             {/* Backdrop Blur Container */}
             <div className=" md:p-12 rounded-2xl shadow-2xl">
-              <div className="inline-block px-6 py-2 bg-[#D84315]/90 text-white text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-lg">
+              <div className="inline-block px-6 py-2 bg-[#D84315]/90 text-white text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-lg mt-5">
                 Sampradaayam Cultural Trust
               </div>
 
