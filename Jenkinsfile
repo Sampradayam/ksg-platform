@@ -1,15 +1,16 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
-      steps {
-        sh 'docker compose build'
-      }
-    }
     stage('Deploy') {
       steps {
-        sh 'docker compose up -d'
+        sh '''
+          cd /home/kuchipudi/ksg-platform/ksg-platform
+          git pull origin main
+          docker compose down
+          docker compose up -d --build
+        '''
       }
     }
   }
 }
+
