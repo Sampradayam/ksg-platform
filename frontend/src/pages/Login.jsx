@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api";
+import logo from "../assets/logo.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,27 +20,17 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF8E7] flex items-center justify-center px-6 py-12 relative overflow-hidden">
-      {/* Decorative Background Elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute top-0 left-0 w-full h-full"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(45deg, #D84315 0px, #D84315 2px, transparent 2px, transparent 10px)",
-          }}
-        ></div>
-      </div>
-
+    <div className="min-h-screen bg-[#FFF8E7] flex items-center justify-center px-6 py-12 relative overflow-hidden mt-14">
       <div className="max-w-md w-full relative z-10">
         {/* Logo/Header */}
         <div className="text-center mb-10">
           <div className="inline-block mb-6">
-            <div
-              className="w-24 h-24 bg-[#D84315] flex items-center justify-center mx-auto shadow-lg border-4 border-[#8D6E63]"
-              style={{ borderRadius: "50%" }}
-            >
-              <span className="text-5xl">💃</span>
+            <div className="h-16 w-auto transform group-hover:scale-105 transition-all duration-300">
+              <img
+                src={logo}
+                alt="Sampradayam Logo"
+                className="h-full w-auto object-contain"
+              />
             </div>
           </div>
           <h1

@@ -36,12 +36,12 @@ export default function Footer() {
         ></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 py-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-10 md:mb-12">
           {/* About Section */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 mb-4">
+          <div className="space-y-4 text-center sm:text-left">
+            <div className="flex items-center justify-center sm:justify-start gap-3 mb-4">
               <div className="w-12 h-12 bg-[#D84315] flex items-center justify-center shadow-lg border-2 border-[#8D6E63]">
                 <span className="text-2xl">💃</span>
               </div>
@@ -64,7 +64,7 @@ export default function Footer() {
             </p>
 
             {/* Social Links */}
-            <div className="flex gap-3 pt-4">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-3 pt-4">
               <a
                 href="#"
                 className="w-10 h-10 bg-[#D84315] flex items-center justify-center hover:bg-[#BF360C] transition-all duration-300 shadow-md border border-[#8D6E63]"
@@ -97,7 +97,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-center sm:text-left">
             <h4
               className="text-lg font-bold text-[#FFECB3] mb-6 border-b-2 border-[#8D6E63] pb-2"
               style={{ fontFamily: "Cinzel, serif" }}
@@ -109,7 +109,7 @@ export default function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-[#D7CCC8] hover:text-[#FFECB3] transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    className="text-[#D7CCC8] hover:text-[#FFECB3] transition-colors duration-300 text-sm inline-flex items-center gap-2 group"
                     style={{ fontFamily: "Crimson Text, serif" }}
                   >
                     <span className="text-[#D84315] group-hover:translate-x-1 transition-transform duration-300">
@@ -123,7 +123,7 @@ export default function Footer() {
           </div>
 
           {/* Courses */}
-          <div>
+          <div className="text-center sm:text-left">
             <h4
               className="text-lg font-bold text-[#FFECB3] mb-6 border-b-2 border-[#8D6E63] pb-2"
               style={{ fontFamily: "Cinzel, serif" }}
@@ -135,7 +135,7 @@ export default function Footer() {
                 <li key={course.path}>
                   <Link
                     to={course.path}
-                    className="text-[#D7CCC8] hover:text-[#FFECB3] transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    className="text-[#D7CCC8] hover:text-[#FFECB3] transition-colors duration-300 text-sm inline-flex items-center gap-2 group"
                     style={{ fontFamily: "Crimson Text, serif" }}
                   >
                     <span className="text-[#D84315] group-hover:translate-x-1 transition-transform duration-300">
@@ -149,7 +149,7 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div>
+          <div className="text-center sm:text-left">
             <h4
               className="text-lg font-bold text-[#FFECB3] mb-6 border-b-2 border-[#8D6E63] pb-2"
               style={{ fontFamily: "Cinzel, serif" }}
@@ -157,7 +157,7 @@ export default function Footer() {
               Contact Us
             </h4>
             <ul className="space-y-4 text-sm text-[#D7CCC8]">
-              <li className="flex items-start gap-3">
+              <li className="flex items-start justify-center sm:justify-start gap-3 text-left">
                 <span className="text-[#D84315] mt-1 text-lg">🏛️</span>
                 <div style={{ fontFamily: "Crimson Text, serif" }}>
                   <p className="font-bold text-[#FFECB3] mb-1">Address</p>
@@ -166,7 +166,7 @@ export default function Footer() {
                   <p>India - 532001</p>
                 </div>
               </li>
-              <li className="flex items-start gap-3">
+              <li className="flex items-start justify-center sm:justify-start gap-3 text-left">
                 <span className="text-[#D84315] mt-1 text-lg">📞</span>
                 <div style={{ fontFamily: "Crimson Text, serif" }}>
                   <p className="font-bold text-[#FFECB3] mb-1">Phone</p>
@@ -174,7 +174,7 @@ export default function Footer() {
                   <p>+91 XXXXX XXXXX</p>
                 </div>
               </li>
-              <li className="flex items-start gap-3">
+              <li className="flex items-start justify-center sm:justify-start gap-3 text-left">
                 <span className="text-[#D84315] mt-1 text-lg">✉️</span>
                 <div style={{ fontFamily: "Crimson Text, serif" }}>
                   <p className="font-bold text-[#FFECB3] mb-1">Email</p>
@@ -191,7 +191,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
             <p
-              className="text-[#D7CCC8] text-sm"
+              className="text-[#D7CCC8] text-sm text-center md:text-left"
               style={{ fontFamily: "Crimson Text, serif" }}
             >
               © {currentYear} Sampradaayam Cultural Trust, Govt. of A.P. All
@@ -199,7 +199,7 @@ export default function Footer() {
             </p>
 
             {/* Additional Links */}
-            <div className="flex gap-6 text-sm">
+            <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Link
                 to="/privacy"
                 className="text-[#D7CCC8] hover:text-[#FFECB3] transition-colors duration-300"

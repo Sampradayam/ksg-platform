@@ -5,6 +5,7 @@ import logo from "../assets/logo.png";
 export default function Navbar() {
   const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,10 @@ export default function Navbar() {
     { name: "Tourism", path: "/tourism" },
     { name: "Login", path: "/login" },
   ];
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   return (
     <nav
@@ -60,12 +65,12 @@ export default function Navbar() {
           </Link>
 
           {/* Navigation Links */}
-          <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-2 md:flex">
             {links.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative px-6 py-2.5 font-bold text-sm transition-all duration-300 uppercase tracking-wider ${
+                className={`group relative px-6 py-2.5 font-bold text-sm transition-all duration-300 uppercase tracking-wider ${
                   pathname === link.path
                     ? "bg-[#D84315] text-white shadow-lg"
                     : "text-[#3E2723] hover:text-[#D84315] hover:bg-[#FFECB3]"
@@ -80,6 +85,74 @@ export default function Navbar() {
                 )}
 
                 {/* Hover underline for inactive links */}
+                {pathname !== link.path && (
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D84315] group-hover:w-full transition-all duration-300"></span>
+                )}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className={`md:hidden inline-flex items-center justify-center rounded-md border-2 px-3 py-2 transition-all duration-300 ${
+              isScrolled
+                ? "border-[#D7CCC8] text-[#3E2723] hover:bg-[#FFECB3]"
+                : "border-[#FFECB3] text-[#3E2723] hover:bg-[#FFECB3]"
+            }`}
+          >
+            <span className="sr-only">Open main menu</span>
+            <div className="flex flex-col gap-1.5">
+              <span
+                className={`h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${
+                  isMenuOpen ? "translate-y-2 rotate-45" : ""
+                }`}
+              ></span>
+              <span
+                className={`h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${
+                  isMenuOpen ? "opacity-0" : ""
+                }`}
+              ></span>
+              <span
+                className={`h-0.5 w-6 rounded-full bg-current transition-all duration-300 ${
+                  isMenuOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
+              ></span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ${
+          isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div
+          className={`px-5 pb-4 pt-2 ${
+            isScrolled ? "bg-white" : "bg-[#FFF8E7]"
+          }`}
+        >
+          <div className="flex flex-col gap-2">
+            {links.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`group relative rounded-md px-4 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 ${
+                  pathname === link.path
+                    ? "bg-[#D84315] text-white shadow-lg"
+                    : "text-[#3E2723] hover:text-[#D84315] hover:bg-[#FFECB3]"
+                }`}
+                style={{ fontFamily: "Cinzel, serif" }}
+              >
+                <span className="relative z-10">{link.name}</span>
+                {pathname === link.path && (
+                  <span className="absolute bottom-0 left-0 w-full h-1 bg-[#8D6E63]"></span>
+                )}
                 {pathname !== link.path && (
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D84315] group-hover:w-full transition-all duration-300"></span>
                 )}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../api";
+import logo from "../assets/logo.png";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -26,7 +27,12 @@ export default function Signup() {
       return;
     }
     try {
-      const { data } = await register(formData.name, formData.email, formData.password, formData.phone);
+      const { data } = await register(
+        formData.name,
+        formData.email,
+        formData.password,
+        formData.phone,
+      );
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate("/profile");
     } catch (error) {
@@ -35,7 +41,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 flex items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 flex items-center justify-center px-6 py-12 mt-14">
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute top-10 right-20 w-96 h-96 bg-orange-400 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 left-20 w-96 h-96 bg-red-400 rounded-full blur-3xl"></div>
@@ -45,8 +51,12 @@ export default function Signup() {
         {/* Logo/Header */}
         <div className="text-center mb-8">
           <div className="inline-block mb-4">
-            <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mx-auto shadow-2xl">
-              <span className="text-4xl">🌸</span>
+            <div className="h-16 w-auto transform transition-all duration-300">
+              <img
+                src={logo}
+                alt="Sampradayam Logo"
+                className="h-full w-auto object-contain"
+              />
             </div>
           </div>
           <h1
