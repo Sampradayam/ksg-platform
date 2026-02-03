@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api";
+import { storeUserInfo } from "../utils/auth";
 import logo from "../assets/logo.png";
 
 export default function Login() {
@@ -12,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const { data } = await login(email, password);
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      storeUserInfo(data);
       navigate("/");
     } catch (error) {
       alert("Invalid email or password");

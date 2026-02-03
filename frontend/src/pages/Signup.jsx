@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../api";
+import { storeUserInfo } from "../utils/auth";
 import logo from "../assets/logo.png";
 
 export default function Signup() {
@@ -33,7 +34,7 @@ export default function Signup() {
         formData.password,
         formData.phone,
       );
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      storeUserInfo(data);
       navigate("/profile");
     } catch (error) {
       const message =

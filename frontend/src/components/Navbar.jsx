@@ -1,17 +1,15 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
 import logo from "../assets/logo.png";
+import { clearUserInfo, getUserInfo } from "../utils/auth";
 
 export default function Navbar() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userInfo, setUserInfo] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("userInfo")) || null;
-    } catch {
-      return null;
-    }
+    return getUserInfo();
   });
 
   useEffect(() => {
@@ -34,12 +32,35 @@ export default function Navbar() {
 
   useEffect(() => {
     setIsMenuOpen(false);
-    try {
-      setUserInfo(JSON.parse(localStorage.getItem("userInfo")) || null);
-    } catch {
-      setUserInfo(null);
-    }
+    setUserInfo(getUserInfo());
   }, [pathname]);
+
+  const handleLogout = useCallback(() => {
+    clearUserInfo();
+    setUserInfo(null);
+    navigate("/login");
+  }, [navigate]);
+
+  useEffect(() => {
+    if (!userInfo?.expiresAt) return;
+    const remaining = userInfo.expiresAt - Date.now();
+    if (remaining <= 0) {
+      handleLogout();
+      return;
+    }
+    const timeoutId = setTimeout(handleLogout, remaining);
+    return () => clearTimeout(timeoutId);
+  }, [userInfo?.expiresAt, handleLogout]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const info = getUserInfo();
+      if (!info) {
+        setUserInfo(null);
+      }
+    }, 60 * 1000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <nav
@@ -104,6 +125,17 @@ export default function Navbar() {
                 )}
               </Link>
             ))}
+            {userInfo?.token && (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="group relative px-6 py-2.5 font-bold text-sm transition-all duration-300 uppercase tracking-wider text-[#3E2723] hover:text-[#D84315] hover:bg-[#FFECB3]"
+                style={{ fontFamily: "Cinzel, serif" }}
+              >
+                <span className="relative z-10">Logout</span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D84315] group-hover:w-full transition-all duration-300"></span>
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -172,6 +204,20 @@ export default function Navbar() {
                 )}
               </Link>
             ))}
+            {userInfo?.token && (
+              <button
+                type="button"
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(false);
+                }}
+                className="group relative rounded-md px-4 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 text-[#3E2723] hover:text-[#D84315] hover:bg-[#FFECB3]"
+                style={{ fontFamily: "Cinzel, serif" }}
+              >
+                <span className="relative z-10">Logout</span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D84315] group-hover:w-full transition-all duration-300"></span>
+              </button>
+            )}
           </div>
         </div>
       </div>
