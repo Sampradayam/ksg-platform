@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import one from "../assets/1.png";
 import two from "../assets/2.png";
 import three from "../assets/3.png";
@@ -37,7 +38,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF8E7] text-[#3E2723] font-serif mt-14 sm:mt-20">
+    <div className="min-h-screen bg-[#FFF8E7] text-[#3E2723] font-serif mt-10 sm:mt-20">
       {/* Hero Section with Full-Width Image Carousel and Text Overlay */}
       <div className="relative w-full h-screen">
         {/* Image Carousel - Full Width Background */}
@@ -95,12 +96,13 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap justify-center gap-5">
-                <button
+                <Link
+                  to="/tourism#book-visit"
                   className="px-10 py-4 bg-[#D84315] text-white font-bold tracking-wide hover:bg-[#BF360C] transition-all shadow-2xl uppercase backdrop-blur-sm border-2 border-white/30"
                   style={{ fontFamily: "Cinzel, serif" }}
                 >
                   Book a 2-Day Visit
-                </button>
+                </Link>
                 <button
                   className="px-10 py-4 bg-white/20 backdrop-blur-sm border-2 border-white text-white font-bold tracking-wide hover:bg-white hover:text-[#3E2723] transition-all shadow-2xl uppercase"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -169,6 +171,7 @@ export default function Home() {
           </p>
         </div>
       </div>
+
 
       {/* National Centre Vision */}
       <div className="py-16 px-6 bg-[#FFF8E7]">
@@ -388,7 +391,7 @@ export default function Home() {
       </div>
 
       {/* Google Fonts Import */}
-      <style jsx>{`
+      <style>{`
         @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600;700&display=swap");
       `}</style>
     </div>

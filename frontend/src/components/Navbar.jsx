@@ -6,6 +6,13 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("userInfo")) || null;
+    } catch {
+      return null;
+    }
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,11 +27,18 @@ export default function Navbar() {
     { name: "About", path: "/about" },
     { name: "Courses", path: "/courses" },
     { name: "Tourism", path: "/tourism" },
-    { name: "Login", path: "/login" },
   ];
+  const authLink = userInfo?.token
+    ? { name: "Profile", path: "/profile" }
+    : { name: "Login", path: "/login" };
 
   useEffect(() => {
     setIsMenuOpen(false);
+    try {
+      setUserInfo(JSON.parse(localStorage.getItem("userInfo")) || null);
+    } catch {
+      setUserInfo(null);
+    }
   }, [pathname]);
 
   return (
@@ -66,7 +80,7 @@ export default function Navbar() {
 
           {/* Navigation Links */}
           <div className="hidden items-center gap-2 md:flex">
-            {links.map((link) => (
+            {[...links, authLink].map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -138,7 +152,7 @@ export default function Navbar() {
           }`}
         >
           <div className="flex flex-col gap-2">
-            {links.map((link) => (
+            {[...links, authLink].map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -166,7 +180,7 @@ export default function Navbar() {
       {/* <div className="h-1 bg-[#8D6E63] opacity-20"></div> */}
 
       {/* Google Fonts Import */}
-      <style jsx>{`
+      <style>{`
         @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600;700&display=swap");
       `}</style>
     </nav>

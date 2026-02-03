@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BookingForm from "../components/BookingForm";
 
 export default function Tourism() {
   const [selectedPlace, setSelectedPlace] = useState("sampradaayam");
@@ -62,18 +63,61 @@ export default function Tourism() {
           </p>
 
           <div className="flex justify-center gap-4">
-            <button
+            <a
+              href="#book-visit"
               className="px-8 py-4 bg-[#D84315] text-white font-bold hover:bg-[#BF360C] transition-all shadow-lg uppercase tracking-wide"
               style={{ fontFamily: "Cinzel, serif" }}
             >
               Plan Your Visit
-            </button>
+            </a>
             <button
               className="px-8 py-4 bg-white text-[#D84315] border-2 border-[#D84315] font-bold hover:bg-[#FFECB3] transition-all uppercase tracking-wide"
               style={{ fontFamily: "Cinzel, serif" }}
             >
               View Gallery
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 2-Day Visit Booking */}
+      <div id="book-visit" className="py-20 px-6 bg-white border-b-4 border-[#D84315]">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="inline-block px-4 py-2 bg-[#D84315] text-white text-xs font-bold uppercase tracking-[0.2em] mb-5 shadow-lg">
+              Two-Day Visit
+            </div>
+            <h2
+              className="text-4xl md:text-5xl font-bold text-[#3E2723] mb-5"
+              style={{ fontFamily: "Cinzel, serif" }}
+            >
+              Book a 2-Day Visit
+            </h2>
+            <div
+              className="space-y-4 text-lg text-[#5D4037] leading-relaxed"
+              style={{ fontFamily: "Crimson Text, serif" }}
+            >
+              <p>
+                Sampradaayam Kuchipudi Gurukulam welcomes visitors who want to
+                experience the Gurukula tradition first-hand. Spend two days on
+                campus to observe training, interact with teachers, and feel the
+                rhythm of daily practice.
+              </p>
+              <p>
+                Share your preferred dates, group size, and accommodation needs.
+                Our team will confirm availability and guide you through the
+                visit plan.
+              </p>
+            </div>
+            <div className="mt-6 space-y-2 text-sm text-[#5D4037]">
+              <div>✅ Live class observation and studio tour</div>
+              <div>✅ Cultural briefing and interaction with faculty</div>
+              <div>✅ Riverside campus walk and heritage overview</div>
+            </div>
+          </div>
+
+          <div className="bg-[#FFF8E7] border-2 border-[#D7CCC8] p-8 shadow-xl">
+            <BookingForm />
           </div>
         </div>
       </div>
@@ -604,7 +648,7 @@ export default function Tourism() {
       </div>
 
       {/* Google Fonts Import */}
-      <style jsx>{`
+      <style>{`
         @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600;700&display=swap");
       `}</style>
     </div>

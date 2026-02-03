@@ -17,7 +17,7 @@ export const login = (email, password) => api.post('/auth/login', { email, passw
 export const register = (name, email, password, phone) => api.post('/auth/register', { name, email, password, phone });
 export const getUserProfile = () => api.get('/users/profile');
 export const updateUserProfile = (userData) => api.put('/users/profile', userData);
+export const createBooking = (bookingData) => api.post('/bookings', bookingData);
 
 
 export default api;
-

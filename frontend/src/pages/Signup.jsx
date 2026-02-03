@@ -36,7 +36,9 @@ export default function Signup() {
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate("/profile");
     } catch (error) {
-      alert("Failed to register");
+      const message =
+        error?.response?.data?.message || "Failed to register";
+      alert(message);
     }
   };
 
@@ -96,6 +98,7 @@ export default function Signup() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Enter your full name"
+                  autoComplete="name"
                   className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                   required
                 />
@@ -124,6 +127,7 @@ export default function Signup() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your.email@example.com"
+                    autoComplete="email"
                     className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                     required
                   />
@@ -150,6 +154,7 @@ export default function Signup() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+91 98765 43210"
+                    autoComplete="tel"
                     className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                     required
                   />
@@ -179,6 +184,7 @@ export default function Signup() {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder="Create password"
+                    autoComplete="new-password"
                     className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                     required
                   />
@@ -205,6 +211,7 @@ export default function Signup() {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="Confirm password"
+                    autoComplete="new-password"
                     className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                     required
                   />
@@ -318,7 +325,7 @@ export default function Signup() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:wght@400;600;700&display=swap");
       `}</style>
     </div>
