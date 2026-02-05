@@ -34,7 +34,7 @@ export default function Tourism() {
   return (
     <div className="min-h-screen bg-[#FFF8E7]">
       {/* Hero Section */}
-      <div className="relative py-24 px-6 bg-[#FFECB3] border-b-4 border-[#D84315]">
+      <div className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-[#FFECB3] border-b-4 border-[#D84315]">
         <div className="max-w-6xl mx-auto relative text-center">
           <div className="inline-block mb-6">
             <div className="flex items-center gap-3 text-[#D84315] text-sm font-bold uppercase tracking-widest">
@@ -47,14 +47,14 @@ export default function Tourism() {
           </div>
 
           <h1
-            className="text-5xl md:text-6xl font-bold mb-6 text-[#3E2723]"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 sm:mb-6 text-[#3E2723]"
             style={{ fontFamily: "Cinzel, serif" }}
           >
             Cultural Tourism
           </h1>
 
           <p
-            className="text-xl text-[#5D4037] max-w-3xl mx-auto mb-8"
+            className="text-lg sm:text-xl text-[#5D4037] max-w-3xl mx-auto mb-6 sm:mb-8"
             style={{ fontFamily: "Crimson Text, serif" }}
           >
             Journey to Kallepally, Srikakulam - where traditional Kuchipudi
@@ -62,16 +62,16 @@ export default function Tourism() {
             heritage
           </p>
 
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
               href="#book-visit"
-              className="px-8 py-4 bg-[#D84315] text-white font-bold hover:bg-[#BF360C] transition-all shadow-lg uppercase tracking-wide"
+              className="px-7 sm:px-8 py-3 sm:py-4 bg-[#D84315] text-white font-bold hover:bg-[#BF360C] transition-all shadow-lg uppercase tracking-wide"
               style={{ fontFamily: "Cinzel, serif" }}
             >
               Plan Your Visit
             </a>
             <button
-              className="px-8 py-4 bg-white text-[#D84315] border-2 border-[#D84315] font-bold hover:bg-[#FFECB3] transition-all uppercase tracking-wide"
+              className="px-7 sm:px-8 py-3 sm:py-4 bg-white text-[#D84315] border-2 border-[#D84315] font-bold hover:bg-[#FFECB3] transition-all uppercase tracking-wide"
               style={{ fontFamily: "Cinzel, serif" }}
             >
               View Gallery
@@ -81,20 +81,23 @@ export default function Tourism() {
       </div>
 
       {/* 2-Day Visit Booking */}
-      <div id="book-visit" className="py-20 px-6 bg-white border-b-4 border-[#D84315]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div
+        id="book-visit"
+        className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-white border-b-4 border-[#D84315]"
+      >
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div>
             <div className="inline-block px-4 py-2 bg-[#D84315] text-white text-xs font-bold uppercase tracking-[0.2em] mb-5 shadow-lg">
               Two-Day Visit
             </div>
             <h2
-              className="text-4xl md:text-5xl font-bold text-[#3E2723] mb-5"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#3E2723] mb-4 sm:mb-5"
               style={{ fontFamily: "Cinzel, serif" }}
             >
               Book a 2-Day Visit
             </h2>
             <div
-              className="space-y-4 text-lg text-[#5D4037] leading-relaxed"
+              className="space-y-4 text-base sm:text-lg text-[#5D4037] leading-relaxed"
               style={{ fontFamily: "Crimson Text, serif" }}
             >
               <p>
@@ -116,26 +119,26 @@ export default function Tourism() {
             </div>
           </div>
 
-          <div className="bg-[#FFF8E7] border-2 border-[#D7CCC8] p-8 shadow-xl">
+          <div className="bg-[#FFF8E7] border-2 border-[#D7CCC8] p-6 sm:p-8 shadow-xl">
             <BookingForm />
           </div>
         </div>
       </div>
 
       {/* About Sampradaayam Campus */}
-      <div className="py-20 px-6 bg-white">
+      <div className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
               <h2
-                className="text-4xl md:text-5xl font-bold text-[#3E2723] mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#3E2723] mb-5 sm:mb-6"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Sampradaayam Cultural Trust
               </h2>
 
               <div
-                className="space-y-4 text-lg text-[#5D4037] leading-relaxed"
+                className="space-y-4 text-base sm:text-lg text-[#5D4037] leading-relaxed"
                 style={{ fontFamily: "Crimson Text, serif" }}
               >
                 <p>
@@ -160,8 +163,8 @@ export default function Tourism() {
                 </p>
               </div>
 
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6">
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-5 sm:p-6">
                   <div className="text-sm text-[#5D4037] mb-1 font-semibold">
                     Location
                   </div>
@@ -173,7 +176,7 @@ export default function Tourism() {
                   </div>
                   <div className="text-sm text-[#5D4037]">Andhra Pradesh</div>
                 </div>
-                <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6">
+                <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-5 sm:p-6">
                   <div className="text-sm text-[#5D4037] mb-1 font-semibold">
                     Campus Size
                   </div>
@@ -191,10 +194,10 @@ export default function Tourism() {
             </div>
 
             <div className="relative">
-              <div className="bg-[#FFECB3] border-4 border-[#D7CCC8] p-8 shadow-xl">
-                <div className="bg-white p-8">
+              <div className="bg-[#FFECB3] border-4 border-[#D7CCC8] p-6 sm:p-8 shadow-xl">
+                <div className="bg-white p-6 sm:p-8">
                   <h3
-                    className="text-2xl font-bold text-[#3E2723] mb-6 border-b-2 border-[#D84315] pb-3"
+                    className="text-xl sm:text-2xl font-bold text-[#3E2723] mb-5 sm:mb-6 border-b-2 border-[#D84315] pb-3"
                     style={{ fontFamily: "Cinzel, serif" }}
                   >
                     Campus Features
@@ -285,28 +288,28 @@ export default function Tourism() {
       </div>
 
       {/* Nearby Places */}
-      <div className="py-20 px-6 bg-[#FFECB3]">
+      <div className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-[#FFECB3]">
         <div className="max-w-6xl mx-auto">
           <h2
-            className="text-4xl md:text-5xl font-bold text-center text-[#3E2723] mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#3E2723] mb-3 sm:mb-4"
             style={{ fontFamily: "Cinzel, serif" }}
           >
             Explore Nearby Attractions
           </h2>
           <p
-            className="text-center text-[#5D4037] mb-12 max-w-2xl mx-auto"
+            className="text-center text-[#5D4037] mb-8 sm:mb-12 max-w-2xl mx-auto"
             style={{ fontFamily: "Crimson Text, serif" }}
           >
             Discover the cultural and natural beauty surrounding Sampradaayam
           </p>
 
           {/* Place Selector */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
             {Object.keys(places).map((place) => (
               <button
                 key={place}
                 onClick={() => setSelectedPlace(place)}
-                className={`p-6 transition-all duration-300 border-2 ${
+                className={`p-4 sm:p-5 md:p-6 transition-all duration-300 border-2 ${
                   selectedPlace === place
                     ? "bg-[#D84315] text-white border-[#D84315] shadow-xl"
                     : "bg-white text-[#3E2723] border-[#D7CCC8] hover:bg-[#FFF8E7]"
@@ -324,17 +327,17 @@ export default function Tourism() {
           </div>
 
           {/* Place Details */}
-          <div className="bg-white border-4 border-[#D7CCC8] p-10 shadow-xl">
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="bg-white border-4 border-[#D7CCC8] p-6 sm:p-8 md:p-10 shadow-xl">
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
               <div className="md:col-span-2">
                 <h3
-                  className="text-3xl font-bold text-[#3E2723] mb-4"
+                  className="text-2xl sm:text-3xl font-bold text-[#3E2723] mb-3 sm:mb-4"
                   style={{ fontFamily: "Cinzel, serif" }}
                 >
                   {places[selectedPlace].name}
                 </h3>
                 <p
-                  className="text-lg text-[#5D4037] mb-4"
+                  className="text-base sm:text-lg text-[#5D4037] mb-4"
                   style={{ fontFamily: "Crimson Text, serif" }}
                 >
                   {places[selectedPlace].description}
@@ -350,7 +353,7 @@ export default function Tourism() {
                 </div>
               </div>
 
-              <div className="bg-[#FFECB3] p-6 border-l-4 border-[#D84315]">
+              <div className="bg-[#FFECB3] p-5 sm:p-6 border-l-4 border-[#D84315]">
                 <h4
                   className="font-bold text-[#3E2723] mb-4"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -371,7 +374,7 @@ export default function Tourism() {
             {/* Specific Details Based on Selection */}
             {selectedPlace === "sampradaayam" && (
               <div className="space-y-6">
-                <div className="bg-[#FFF8E7] p-6 border-l-4 border-[#8D6E63]">
+                <div className="bg-[#FFF8E7] p-5 sm:p-6 border-l-4 border-[#8D6E63]">
                   <h5
                     className="font-bold text-[#3E2723] mb-3"
                     style={{ fontFamily: "Cinzel, serif" }}
@@ -394,7 +397,7 @@ export default function Tourism() {
                   </div>
                 </div>
 
-                <div className="bg-[#FFF8E7] p-6 border-l-4 border-[#8D6E63]">
+                <div className="bg-[#FFF8E7] p-5 sm:p-6 border-l-4 border-[#8D6E63]">
                   <h5
                     className="font-bold text-[#3E2723] mb-3"
                     style={{ fontFamily: "Cinzel, serif" }}
@@ -421,7 +424,7 @@ export default function Tourism() {
             )}
 
             {selectedPlace === "srikakulam" && (
-              <div className="bg-[#FFF8E7] p-6 border-l-4 border-[#8D6E63]">
+              <div className="bg-[#FFF8E7] p-5 sm:p-6 border-l-4 border-[#8D6E63]">
                 <h5
                   className="font-bold text-[#3E2723] mb-3"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -450,7 +453,7 @@ export default function Tourism() {
             )}
 
             {selectedPlace === "arasavalli" && (
-              <div className="bg-[#FFF8E7] p-6 border-l-4 border-[#8D6E63]">
+              <div className="bg-[#FFF8E7] p-5 sm:p-6 border-l-4 border-[#8D6E63]">
                 <h5
                   className="font-bold text-[#3E2723] mb-3"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -479,7 +482,7 @@ export default function Tourism() {
             )}
 
             {selectedPlace === "kalingapatnam" && (
-              <div className="bg-[#FFF8E7] p-6 border-l-4 border-[#8D6E63]">
+              <div className="bg-[#FFF8E7] p-5 sm:p-6 border-l-4 border-[#8D6E63]">
                 <h5
                   className="font-bold text-[#3E2723] mb-3"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -510,20 +513,20 @@ export default function Tourism() {
       </div>
 
       {/* Travel Information */}
-      <div className="py-20 px-6 bg-white">
+      <div className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2
-            className="text-4xl md:text-5xl font-bold text-center text-[#3E2723] mb-12"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#3E2723] mb-8 sm:mb-12"
             style={{ fontFamily: "Cinzel, serif" }}
           >
             Plan Your Journey
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-8">
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6 sm:p-8">
               <div className="text-5xl mb-4">✈️</div>
               <h3
-                className="text-2xl font-bold text-[#3E2723] mb-4"
+                className="text-xl sm:text-2xl font-bold text-[#3E2723] mb-4"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 How to Reach
@@ -557,10 +560,10 @@ export default function Tourism() {
               </div>
             </div>
 
-            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-8">
+            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6 sm:p-8">
               <div className="text-5xl mb-4">🏨</div>
               <h3
-                className="text-2xl font-bold text-[#3E2723] mb-4"
+                className="text-xl sm:text-2xl font-bold text-[#3E2723] mb-4"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Where to Stay
@@ -584,10 +587,10 @@ export default function Tourism() {
               </div>
             </div>
 
-            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-8">
+            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6 sm:p-8">
               <div className="text-5xl mb-4">📅</div>
               <h3
-                className="text-2xl font-bold text-[#3E2723] mb-4"
+                className="text-xl sm:text-2xl font-bold text-[#3E2723] mb-4"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Best Time to Visit
@@ -611,30 +614,30 @@ export default function Tourism() {
             </div>
           </div>
 
-          <div className="mt-12 bg-[#D84315] p-10 text-white text-center shadow-xl">
+          <div className="mt-10 sm:mt-12 bg-[#D84315] p-6 sm:p-8 md:p-10 text-white text-center shadow-xl">
             <h3
-              className="text-3xl font-bold mb-4"
+              className="text-2xl sm:text-3xl font-bold mb-4"
               style={{ fontFamily: "Cinzel, serif" }}
             >
               Experience Authentic Cultural Immersion
             </h3>
             <p
-              className="text-xl mb-6 max-w-3xl mx-auto"
+              className="text-lg sm:text-xl mb-5 sm:mb-6 max-w-3xl mx-auto"
               style={{ fontFamily: "Crimson Text, serif" }}
             >
               Visit Sampradaayam to witness the ancient Gurukula system, attend
               cultural performances, and experience traditional Kuchipudi dance
               in its authentic setting.
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
-                className="px-8 py-4 bg-white text-[#D84315] font-bold hover:bg-[#FFECB3] transition-all shadow-lg uppercase tracking-wide"
+                className="px-7 sm:px-8 py-3 sm:py-4 bg-white text-[#D84315] font-bold hover:bg-[#FFECB3] transition-all shadow-lg uppercase tracking-wide"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Schedule a Visit
               </button>
               <button
-                className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold hover:bg-white hover:text-[#D84315] transition-all uppercase tracking-wide"
+                className="px-7 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-white text-white font-bold hover:bg-white hover:text-[#D84315] transition-all uppercase tracking-wide"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Contact Us

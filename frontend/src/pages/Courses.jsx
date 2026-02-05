@@ -88,7 +88,7 @@ export default function Courses() {
   return (
     <div className="min-h-screen bg-[#FFF8E7]">
       {/* Hero Section */}
-      <div className="relative py-24 px-6 bg-[#FFECB3] border-b-4 border-[#D84315]">
+      <div className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-[#FFECB3] border-b-4 border-[#D84315]">
         <div className="max-w-6xl mx-auto relative text-center">
           <div className="inline-block mb-6">
             <div className="flex items-center gap-3 text-[#D84315] text-sm font-bold uppercase tracking-widest">
@@ -99,14 +99,14 @@ export default function Courses() {
           </div>
 
           <h1
-            className="text-5xl md:text-6xl font-bold mb-6 text-[#3E2723]"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-5 sm:mb-6 text-[#3E2723]"
             style={{ fontFamily: "Cinzel, serif" }}
           >
             Kuchipudi Dance Courses
           </h1>
 
           <p
-            className="text-xl text-[#5D4037] max-w-3xl mx-auto mb-12"
+            className="text-lg sm:text-xl text-[#5D4037] max-w-3xl mx-auto mb-8 sm:mb-12"
             style={{ fontFamily: "Crimson Text, serif" }}
           >
             Complete education in the arena of Kuchipudi Dance for ardent
@@ -114,12 +114,12 @@ export default function Courses() {
           </p>
 
           {/* Course Level Selector */}
-          <div className="grid md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto">
             {Object.keys(courses).map((level) => (
               <button
                 key={level}
                 onClick={() => setSelectedLevel(level)}
-                className={`p-6 transition-all duration-300 border-2 ${
+                className={`p-4 sm:p-5 md:p-6 transition-all duration-300 border-2 ${
                   selectedLevel === level
                     ? "bg-[#D84315] text-white border-[#D84315] shadow-xl scale-105"
                     : "bg-white text-[#3E2723] border-[#D7CCC8] hover:bg-[#FFECB3]"
@@ -144,38 +144,38 @@ export default function Courses() {
       </div>
 
       {/* Course Details */}
-      <div className="py-12 px-6">
+      <div className="py-10 sm:py-12 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white border-4 border-[#D7CCC8] shadow-2xl p-12">
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="bg-white border-4 border-[#D7CCC8] shadow-2xl p-6 sm:p-8 md:p-12">
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
               <div className="text-center md:col-span-3">
                 <div className="text-5xl mb-2">📚</div>
                 <h3
-                  className="text-3xl md:text-4xl font-bold text-[#3E2723] mb-2"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#3E2723] mb-2"
                   style={{ fontFamily: "Cinzel, serif" }}
                 >
                   {courses[selectedLevel].title}
                 </h3>
               </div>
 
-              <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6 text-center">
+              <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-5 sm:p-6 text-center">
                 <div className="text-sm text-[#5D4037] mb-1 font-semibold">
                   Duration
                 </div>
                 <div
-                  className="text-2xl font-bold text-[#3E2723]"
+                  className="text-xl sm:text-2xl font-bold text-[#3E2723]"
                   style={{ fontFamily: "Cinzel, serif" }}
                 >
                   {courses[selectedLevel].duration}
                 </div>
               </div>
 
-              <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6 text-center md:col-span-2">
+              <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-5 sm:p-6 text-center md:col-span-2">
                 <div className="text-sm text-[#5D4037] mb-1 font-semibold">
                   Eligibility
                 </div>
                 <div
-                  className="text-lg font-bold text-[#3E2723]"
+                  className="text-base sm:text-lg font-bold text-[#3E2723]"
                   style={{ fontFamily: "Crimson Text, serif" }}
                 >
                   {courses[selectedLevel].eligibility}
@@ -183,11 +183,11 @@ export default function Courses() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               {/* Curriculum */}
               <div>
                 <h4
-                  className="text-2xl font-bold text-[#3E2723] mb-6 flex items-center gap-3 border-b-2 border-[#D84315] pb-3"
+                  className="text-xl sm:text-2xl font-bold text-[#3E2723] mb-5 sm:mb-6 flex items-center gap-3 border-b-2 border-[#D84315] pb-3"
                   style={{ fontFamily: "Cinzel, serif" }}
                 >
                   <span className="text-3xl">📖</span>
@@ -197,7 +197,7 @@ export default function Courses() {
                   {courses[selectedLevel].content.map((item, index) => (
                     <div
                       key={index}
-                      className="flex items-start gap-3 bg-[#FFF8E7] border-l-4 border-[#8D6E63] p-3"
+                      className="flex items-start gap-3 bg-[#FFF8E7] border-l-4 border-[#8D6E63] p-3 sm:p-4"
                     >
                       <div className="flex-shrink-0 w-6 h-6 bg-[#D84315] flex items-center justify-center text-white text-sm font-bold">
                         {index + 1}
@@ -216,7 +216,7 @@ export default function Courses() {
               {/* Benefits */}
               <div>
                 <h4
-                  className="text-2xl font-bold text-[#3E2723] mb-6 flex items-center gap-3 border-b-2 border-[#D84315] pb-3"
+                  className="text-xl sm:text-2xl font-bold text-[#3E2723] mb-5 sm:mb-6 flex items-center gap-3 border-b-2 border-[#D84315] pb-3"
                   style={{ fontFamily: "Cinzel, serif" }}
                 >
                   <span className="text-3xl">✨</span>
@@ -226,7 +226,7 @@ export default function Courses() {
                   {courses[selectedLevel].benefits.map((item, index) => (
                     <div
                       key={index}
-                      className="flex items-start gap-3 bg-[#FFF8E7] border-l-4 border-[#D84315] p-3"
+                      className="flex items-start gap-3 bg-[#FFF8E7] border-l-4 border-[#D84315] p-3 sm:p-4"
                     >
                       <div className="text-[#D84315] text-xl">✓</div>
                       <div
@@ -245,18 +245,18 @@ export default function Courses() {
       </div>
 
       {/* Selection Process */}
-      <div className="py-20 px-6 bg-[#FFECB3]">
+      <div className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-[#FFECB3]">
         <div className="max-w-6xl mx-auto">
           <h2
-            className="text-4xl md:text-5xl font-bold text-center text-[#3E2723] mb-12"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#3E2723] mb-8 sm:mb-12"
             style={{ fontFamily: "Cinzel, serif" }}
           >
             Selection Process
           </h2>
 
-          <div className="bg-white border-4 border-[#D7CCC8] p-10 shadow-xl">
+          <div className="bg-white border-4 border-[#D7CCC8] p-6 sm:p-8 md:p-10 shadow-xl">
             <div className="space-y-6">
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div
                   className="flex-shrink-0 w-12 h-12 bg-[#D84315] flex items-center justify-center text-white font-bold text-xl"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -281,7 +281,7 @@ export default function Courses() {
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div
                   className="flex-shrink-0 w-12 h-12 bg-[#D84315] flex items-center justify-center text-white font-bold text-xl"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -306,7 +306,7 @@ export default function Courses() {
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div
                   className="flex-shrink-0 w-12 h-12 bg-[#D84315] flex items-center justify-center text-white font-bold text-xl"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -331,7 +331,7 @@ export default function Courses() {
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div
                   className="flex-shrink-0 w-12 h-12 bg-[#D84315] flex items-center justify-center text-white font-bold text-xl"
                   style={{ fontFamily: "Cinzel, serif" }}
@@ -361,20 +361,20 @@ export default function Courses() {
       </div>
 
       {/* Facilities & Academic Support */}
-      <div className="py-20 px-6 bg-white">
+      <div className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2
-            className="text-4xl md:text-5xl font-bold text-center text-[#3E2723] mb-12"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#3E2723] mb-8 sm:mb-12"
             style={{ fontFamily: "Cinzel, serif" }}
           >
             Facilities & Support
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
             {/* Residential Facilities */}
-            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-10 shadow-lg">
+            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6 sm:p-8 md:p-10 shadow-lg">
               <h3
-                className="text-2xl font-bold text-[#3E2723] mb-6 border-b-2 border-[#D84315] pb-3"
+                className="text-xl sm:text-2xl font-bold text-[#3E2723] mb-5 sm:mb-6 border-b-2 border-[#D84315] pb-3"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Residential Facilities
@@ -416,9 +416,9 @@ export default function Courses() {
             </div>
 
             {/* Academic Support */}
-            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-10 shadow-lg">
+            <div className="bg-[#FFECB3] border-2 border-[#D7CCC8] p-6 sm:p-8 md:p-10 shadow-lg">
               <h3
-                className="text-2xl font-bold text-[#3E2723] mb-6 border-b-2 border-[#D84315] pb-3"
+                className="text-xl sm:text-2xl font-bold text-[#3E2723] mb-5 sm:mb-6 border-b-2 border-[#D84315] pb-3"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Academic Education
@@ -463,24 +463,24 @@ export default function Courses() {
       </div>
 
       {/* Evening Classes */}
-      <div className="py-20 px-6 bg-[#FFECB3]">
+      <div className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-[#FFECB3]">
         <div className="max-w-4xl mx-auto text-center">
           <h2
-            className="text-4xl font-bold text-[#3E2723] mb-6"
+            className="text-3xl sm:text-4xl font-bold text-[#3E2723] mb-5 sm:mb-6"
             style={{ fontFamily: "Cinzel, serif" }}
           >
             Evening Classes
           </h2>
           <p
-            className="text-xl text-[#5D4037] mb-8"
+            className="text-lg sm:text-xl text-[#5D4037] mb-6 sm:mb-8"
             style={{ fontFamily: "Crimson Text, serif" }}
           >
             Evening classes in Kuchipudi Dance for all age groups including boys
             and girls
           </p>
-          <div className="bg-white border-4 border-[#D7CCC8] p-10 shadow-xl">
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-[#FFF8E7] p-6 border-l-4 border-[#D84315]">
+          <div className="bg-white border-4 border-[#D7CCC8] p-6 sm:p-8 md:p-10 shadow-xl">
+            <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mb-6 sm:mb-8">
+              <div className="bg-[#FFF8E7] p-5 sm:p-6 border-l-4 border-[#D84315]">
                 <div className="text-3xl mb-2">⏰</div>
                 <div
                   className="font-bold text-[#3E2723]"
@@ -495,7 +495,7 @@ export default function Courses() {
                   4:00 PM - 7:30 PM
                 </div>
               </div>
-              <div className="bg-[#FFF8E7] p-6 border-l-4 border-[#D84315]">
+              <div className="bg-[#FFF8E7] p-5 sm:p-6 border-l-4 border-[#D84315]">
                 <div className="text-3xl mb-2">📅</div>
                 <div
                   className="font-bold text-[#3E2723]"
@@ -510,7 +510,7 @@ export default function Courses() {
                   6 Days a Week
                 </div>
               </div>
-              <div className="bg-[#FFF8E7] p-6 border-l-4 border-[#D84315]">
+              <div className="bg-[#FFF8E7] p-5 sm:p-6 border-l-4 border-[#D84315]">
                 <div className="text-3xl mb-2">👥</div>
                 <div
                   className="font-bold text-[#3E2723]"
@@ -538,31 +538,31 @@ export default function Courses() {
       </div>
 
       {/* Call to Action */}
-      <div className="py-20 px-6 bg-white">
+      <div className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-[#D84315] p-12 text-white text-center shadow-2xl">
+          <div className="bg-[#D84315] p-6 sm:p-8 md:p-12 text-white text-center shadow-2xl">
             <h3
-              className="text-4xl font-bold mb-6"
+              className="text-3xl sm:text-4xl font-bold mb-5 sm:mb-6"
               style={{ fontFamily: "Cinzel, serif" }}
             >
               Join Sampradaayam
             </h3>
             <p
-              className="text-xl mb-8 max-w-2xl mx-auto"
+              className="text-lg sm:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto"
               style={{ fontFamily: "Crimson Text, serif" }}
             >
               In its endeavour to relive the ancient fine arts of India. Begin
               your journey to become a professional Kuchipudi artiste.
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
-                className="px-10 py-4 bg-white text-[#D84315] font-bold hover:bg-[#FFECB3] transition-all shadow-lg uppercase tracking-wide"
+                className="px-8 sm:px-10 py-3 sm:py-4 bg-white text-[#D84315] font-bold hover:bg-[#FFECB3] transition-all shadow-lg uppercase tracking-wide"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Apply Now
               </button>
               <button
-                className="px-10 py-4 bg-transparent border-2 border-white text-white font-bold hover:bg-white hover:text-[#D84315] transition-all uppercase tracking-wide"
+                className="px-8 sm:px-10 py-3 sm:py-4 bg-transparent border-2 border-white text-white font-bold hover:bg-white hover:text-[#D84315] transition-all uppercase tracking-wide"
                 style={{ fontFamily: "Cinzel, serif" }}
               >
                 Download Brochure
