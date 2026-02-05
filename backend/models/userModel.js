@@ -10,13 +10,31 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    authProvider: {
+        type: String,
+        enum: ['local', 'google', 'facebook'],
+        default: 'local'
+    },
+    googleId: {
+        type: String
+    },
+    facebookId: {
+        type: String
+    },
+    avatarUrl: {
+        type: String
+    },
     password: {
         type: String,
-        required: true
+        required: function () {
+            return this.authProvider === 'local';
+        }
     },
     phone: {
         type: String,
-        required: true
+        required: function () {
+            return this.authProvider === 'local';
+        }
     },
     age: {
         type: Number,

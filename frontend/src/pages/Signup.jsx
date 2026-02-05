@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { register } from "../api";
+import { register, loginWithGoogle, loginWithFacebook } from "../api";
 import { storeUserInfo } from "../utils/auth";
+import {
+  ensureGoogleScript,
+  requestGoogleAccessToken,
+  ensureFacebookSdk,
+  requestFacebookAccessToken,
+} from "../utils/socialAuth";
 import logo from "../assets/logo.png";
 
 export default function Signup() {
@@ -12,7 +18,12 @@ export default function Signup() {
     confirmPassword: "",
     phone: "",
   });
+  const [socialLoading, setSocialLoading] = useState(null);
   const navigate = useNavigate();
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID;
+  const isGoogleEnabled = Boolean(googleClientId);
+  const isFacebookEnabled = Boolean(facebookAppId);
 
   const handleChange = (e) => {
     setFormData({
@@ -43,8 +54,38 @@ export default function Signup() {
     }
   };
 
+  const handleGoogleSignup = async () => {
+    try {
+      setSocialLoading("google");
+      await ensureGoogleScript(googleClientId);
+      const accessToken = await requestGoogleAccessToken(googleClientId);
+      const { data } = await loginWithGoogle(accessToken);
+      storeUserInfo(data);
+      navigate("/profile");
+    } catch (error) {
+      alert(error?.message || "Google signup failed");
+    } finally {
+      setSocialLoading(null);
+    }
+  };
+
+  const handleFacebookSignup = async () => {
+    try {
+      setSocialLoading("facebook");
+      await ensureFacebookSdk(facebookAppId);
+      const accessToken = await requestFacebookAccessToken();
+      const { data } = await loginWithFacebook(accessToken);
+      storeUserInfo(data);
+      navigate("/profile");
+    } catch (error) {
+      alert(error?.message || "Facebook signup failed");
+    } finally {
+      setSocialLoading(null);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 flex items-center justify-center px-6 py-12 mt-14">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 flex items-center justify-center px-4 sm:px-6 py-10 sm:py-12 mt-14">
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute top-10 right-20 w-96 h-96 bg-orange-400 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 left-20 w-96 h-96 bg-red-400 rounded-full blur-3xl"></div>
@@ -52,7 +93,7 @@ export default function Signup() {
 
       <div className="max-w-2xl w-full relative">
         {/* Logo/Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 sm:mb-8">
           <div className="inline-block mb-4">
             <div className="h-16 w-auto transform transition-all duration-300">
               <img
@@ -63,13 +104,13 @@ export default function Signup() {
             </div>
           </div>
           <h1
-            className="text-4xl font-bold mb-2 bg-gradient-to-r from-orange-600 via-red-600 to-amber-700 bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-orange-600 via-red-600 to-amber-700 bg-clip-text text-transparent"
             style={{ fontFamily: "Playfair Display, Georgia, serif" }}
           >
             Begin Your Journey
           </h1>
           <p
-            className="text-gray-600 text-lg"
+            className="text-gray-600 text-base sm:text-lg"
             style={{ fontFamily: "Crimson Text, Georgia, serif" }}
           >
             Join Sampradhayam Kuchipudi Gurukulam and embrace the divine art
@@ -77,7 +118,7 @@ export default function Signup() {
         </div>
 
         {/* Signup Form */}
-        <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-10 border border-orange-100">
+        <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 sm:p-8 md:p-10 border border-orange-100">
           <form onSubmit={handleSignup} className="space-y-6">
             {/* Name Input */}
             <div>
@@ -100,14 +141,14 @@ export default function Signup() {
                   onChange={handleChange}
                   placeholder="Enter your full name"
                   autoComplete="name"
-                  className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
+                  className="w-full pl-12 pr-4 py-3 sm:py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                   required
                 />
               </div>
             </div>
 
             {/* Email and Phone in Grid */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
               {/* Email Input */}
               <div>
                 <label
@@ -129,7 +170,7 @@ export default function Signup() {
                     onChange={handleChange}
                     placeholder="your.email@example.com"
                     autoComplete="email"
-                    className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
+                    className="w-full pl-12 pr-4 py-3 sm:py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                     required
                   />
                 </div>
@@ -156,7 +197,7 @@ export default function Signup() {
                     onChange={handleChange}
                     placeholder="+91 98765 43210"
                     autoComplete="tel"
-                    className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
+                    className="w-full pl-12 pr-4 py-3 sm:py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                     required
                   />
                 </div>
@@ -164,7 +205,7 @@ export default function Signup() {
             </div>
 
             {/* Password Inputs in Grid */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
               {/* Password Input */}
               <div>
                 <label
@@ -186,7 +227,7 @@ export default function Signup() {
                     onChange={handleChange}
                     placeholder="Create password"
                     autoComplete="new-password"
-                    className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
+                    className="w-full pl-12 pr-4 py-3 sm:py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                     required
                   />
                 </div>
@@ -213,7 +254,7 @@ export default function Signup() {
                     onChange={handleChange}
                     placeholder="Confirm password"
                     autoComplete="new-password"
-                    className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
+                    className="w-full pl-12 pr-4 py-3 sm:py-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 text-gray-900"
                     required
                   />
                 </div>
@@ -252,7 +293,7 @@ export default function Signup() {
             {/* Signup Button */}
             <button
               type="submit"
-              className="w-full py-4 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-xl font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-lg"
+              className="w-full py-3 sm:py-4 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-xl font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300 text-base sm:text-lg"
             >
               Create Account
             </button>
@@ -271,19 +312,42 @@ export default function Signup() {
           </div>
 
           {/* Social Signup */}
-          <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-all duration-300">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <button
+              type="button"
+              onClick={handleGoogleSignup}
+              disabled={!isGoogleEnabled || socialLoading === "google"}
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
               <span>🔍</span>
-              <span className="font-medium text-gray-700">Google</span>
+              <span className="font-medium text-gray-700">
+                {socialLoading === "google" ? "Loading..." : "Google"}
+              </span>
             </button>
-            <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-all duration-300">
+            <button
+              type="button"
+              onClick={handleFacebookSignup}
+              disabled={!isFacebookEnabled || socialLoading === "facebook"}
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
               <span>📘</span>
-              <span className="font-medium text-gray-700">Facebook</span>
+              <span className="font-medium text-gray-700">
+                {socialLoading === "facebook" ? "Loading..." : "Facebook"}
+              </span>
             </button>
           </div>
+          {!isGoogleEnabled || !isFacebookEnabled ? (
+            <p className="mt-3 text-xs text-gray-500">
+              Social signup is unavailable right now.{" "}
+              {!isGoogleEnabled ? "Google" : ""}
+              {!isGoogleEnabled && !isFacebookEnabled ? " and " : ""}
+              {!isFacebookEnabled ? "Facebook" : ""}{" "}
+              is not configured.
+            </p>
+          ) : null}
 
           {/* Login Link */}
-          <div className="mt-8 text-center">
+          <div className="mt-6 sm:mt-8 text-center">
             <p className="text-gray-600">
               Already have an account?{" "}
               <a
@@ -297,7 +361,7 @@ export default function Signup() {
         </div>
 
         {/* Additional Benefits */}
-        <div className="mt-8 grid md:grid-cols-3 gap-4">
+        <div className="mt-6 sm:mt-8 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-lg">
             <div className="text-3xl mb-2">🎓</div>
             <div className="text-sm font-semibold text-gray-900 mb-1">
